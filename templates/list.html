@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p><a href="">Delete All Items</a></p>
+
+<table>
+    <tr>
+        <th>Document ID</th>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th></th>
+    </tr>
+    {% for item in items %}
+    <tr>
+        <td>
+            {{ item.id}}
+        </td>
+        <td>
+            {{ item.to_dict()['name'] }}
+        </td>
+        <td>
+            {{ item.to_dict()['quantity'] }}
+        </td>
+        <td><a href="">Delete Item</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<p></p>
+<p></p>
+
+
+{% endblock %}
