@@ -36,21 +36,21 @@ class Item:
         )
 
 
-def show_list():
+def show_list(user_email):
     db = firestore.Client()
 
     query = db.collection(
-        'parsamesg@gmail.com').order_by('date_created', direction=firestore.Query.DESCENDING)
+        user_email).order_by('date_created', direction=firestore.Query.DESCENDING)
 
     docs = query.stream()
 
     return docs
 
 
-def add_item(name, quantity):
+def add_item(user_email, name, quantity):
     db = firestore.Client()
 
-    query = db.collection('parsamesg@gmail.com')
+    query = db.collection(user_email)
 
     if name == '' and quantity == '':
         return
