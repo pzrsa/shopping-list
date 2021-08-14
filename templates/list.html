@@ -2,21 +2,17 @@
 
 {% block content %}
 
-<button><a href="">Delete All Items</a></button>
+<button><a href="{{ url_for('delete_all') }}">Delete All Items</a></button>
 <button><a href="{{ url_for('add') }}">Add An Item</a></button>
 
 <table>
     <tr>
-        <th>Document ID</th>
         <th>Item</th>
         <th>Quantity</th>
         <th></th>
     </tr>
     {% for item in items %}
     <tr>
-        <td>
-            {{ item.id }}
-        </td>
         <td>
             {{ item.to_dict()['name'] }}
         </td>
@@ -27,9 +23,4 @@
     </tr>
     {% endfor %}
 </table>
-
-<p></p>
-<p></p>
-
-
 {% endblock %}

@@ -28,6 +28,14 @@ def delete(item_id):
     return redirect(url_for('list'))
 
 
+@app.route('/delete_list')
+def delete_all():
+
+    firestore.delete_all_items('parsamesg@gmail.com')
+
+    return redirect(url_for('list'))
+
+
 if __name__ == '__main__':
 
     app.run(debug=True)
