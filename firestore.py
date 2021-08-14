@@ -52,6 +52,9 @@ def add_item(name, quantity):
 
     query = db.collection('parsamesg@gmail.com')
 
+    if name == '' and quantity == '':
+        return
+
     new_item = Item(name, int(quantity)).to_dict()
 
     return query.add(new_item)
