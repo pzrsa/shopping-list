@@ -36,14 +36,6 @@ class Item:
         )
 
 
-# items_ref.add(
-#     Item('eggs', 8).to_dict()
-# )
-# items_ref.add(
-#     Item('milk', 1).to_dict()
-# )
-
-
 def show_list():
     db = firestore.Client()
 
@@ -53,3 +45,32 @@ def show_list():
     docs = query.stream()
 
     return docs
+
+
+def add_item(name, quantity):
+    db = firestore.Client()
+
+    query = db.collection('parsamesg@gmail.com')
+
+    new_item = Item(name, int(quantity)).to_dict()
+
+    return query.add(new_item)
+
+
+def delete_item(item_id):
+    db = firestore.Client()
+
+    query = db.collection('parsamesg@gmail.com')
+
+    return query.document(item_id).delete()
+
+
+def delete_all_items(email):
+    db = firestore.Client()
+
+    query = db.collection(email)
+
+    items = query.stream()
+
+    for item in items:
+        query.document(item.id).delete()
