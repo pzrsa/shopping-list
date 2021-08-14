@@ -23,7 +23,7 @@
         <td>
             {{ item.to_dict()['quantity'] }}
         </td>
-        <td><a href="">Delete Item</a></td>
+        <td><button><a href="{{ item.id }}/delete">Delete Item</a></button></td>
     </tr>
     {% endfor %}
 </table>

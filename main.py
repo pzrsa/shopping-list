@@ -20,6 +20,14 @@ def add():
     return redirect(url_for('list'))
 
 
+@app.route('/<item_id>/delete')
+def delete(item_id):
+
+    firestore.delete_item(item_id)
+
+    return redirect(url_for('list'))
+
+
 if __name__ == '__main__':
 
     app.run(debug=True)
