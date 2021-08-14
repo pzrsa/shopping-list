@@ -37,9 +37,6 @@ class Item:
 
 
 # items_ref.add(
-#     Item('banana', 5).to_dict()
-# )
-# items_ref.add(
 #     Item('eggs', 8).to_dict()
 # )
 # items_ref.add(
@@ -50,7 +47,8 @@ class Item:
 def show_list():
     db = firestore.Client()
 
-    query = db.collection('parsamesg@gmail.com').order_by('date_created')
+    query = db.collection(
+        'parsamesg@gmail.com').order_by('date_created', direction=firestore.Query.DESCENDING)
 
     docs = query.stream()
 
