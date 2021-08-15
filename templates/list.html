@@ -3,7 +3,8 @@
 {% block content %}
 
 <button><a href="{{ url_for('delete_all') }}">Delete All Items</a></button>
-
+<p>Welcome back, {{ given_name }}</p>
+<img src="{{ image }}" alt="User Google Account Image">
 
 <form method="POST" enctype="multipart/form-data">
 
