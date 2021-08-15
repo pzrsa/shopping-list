@@ -35,9 +35,11 @@ def list():
         firestore.add_item(session['user'].get(
             'email'), new_name, new_quantity)
 
-    items = firestore.show_list(session['user'].get('email'))
-
-    return render_template('list.html', items=items, item={}, given_name=session['user'].get('given_name'), image=session['user'].get('picture'))
+    if session:
+        items = firestore.show_list(session['user'].get('email'))
+        return render_template('list.html', item={}, items=items, given_name=session['user'].get('given_name'), image=session['user'].get('picture'))
+    else:
+        return redirect(url_for('login'))
 
 
 @app.route('/login')
