@@ -2,6 +2,8 @@
 
 {% block content %}
 
+
+
 <button><a href="{{ url_for('delete_all') }}">Delete All Items</a></button>
 <p>Welcome back, {{ given_name }}</p>
 <img src="{{ image }}" alt="User Google Account Image">
@@ -23,21 +25,17 @@
 
 
 <table>
-    <tr>
-        <th>Item</th>
-        <th>Quantity</th>
-        <th></th>
-    </tr>
     {% for item in items %}
     <tr>
-        <td>
+        <td style="text-align: center;">
             {{ item.to_dict()['name'] }}
         </td>
-        <td>
+        <td style="text-align: center;">
             {{ item.to_dict()['quantity'] }}
         </td>
         <td><button><a href="{{ item.id }}/delete">Delete Item</a></button></td>
     </tr>
     {% endfor %}
 </table>
+
 {% endblock %}
