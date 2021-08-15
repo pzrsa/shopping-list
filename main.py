@@ -7,13 +7,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.environ.get('SECRET_KEY')
+app.config['SECRET_KEY'] = os.urandom(16).hex()
 
 oauth = OAuth(app)
 
 GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
 GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
-
 GOOGLE_DISCOVERY_URL = 'https://accounts.google.com/.well-known/openid-configuration'
 
 oauth.register(
@@ -29,20 +28,16 @@ oauth.register(
 
 @app.route('/', methods=['GET', 'POST'])
 def list():
-
-    user_email = session['user'].get('email')
-
     if request.method == 'POST':
         new_name = request.form.to_dict()['name']
         new_quantity = request.form.to_dict()['quantity']
 
-        firestore.add_item(user_email, new_name, new_quantity)
+        firestore.add_item(session['user'].get(
+            'email'), new_name, new_quantity)
 
-    items = firestore.show_list(user_email)
+    items = firestore.show_list(session['user'].get('email'))
 
-    given_name = session['user'].get('given_name')
-
-    return render_template('list.html', items=items, item={}, given_name=given_name)
+    return render_template('list.html', items=items, item={}, given_name=session['user'].get('given_name'), image=session['user'].get('picture'))
 
 
 @app.route('/login')
@@ -62,7 +57,7 @@ def auth():
 @app.route('/<item_id>/delete')
 def delete(item_id):
 
-    firestore.delete_item(item_id)
+    firestore.delete_item(session['user'].get('email'), item_id)
 
     return redirect(url_for('list'))
 
@@ -70,7 +65,7 @@ def delete(item_id):
 @app.route('/delete_list')
 def delete_all():
 
-    firestore.delete_all_items('parsamesg@gmail.com')
+    firestore.delete_all_items(session['user'].get('email'))
 
     return redirect(url_for('list'))
 

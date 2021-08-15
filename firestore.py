@@ -45,10 +45,10 @@ def add_item(user_email, name, quantity):
     return query.add(new_item)
 
 
-def delete_item(item_id):
+def delete_item(user_email, item_id):
     db = firestore.Client()
 
-    query = db.collection('parsamesg@gmail.com').document(item_id)
+    query = db.collection(user_email).document(item_id)
 
     query.delete()
 
