@@ -10,12 +10,6 @@ class Item:
         self.quantity = quantity
         self.date_created = datetime.now()
 
-    @staticmethod
-    def from_dict(source):
-        item = Item(source['name'], source['quantity'], source['date_created'])
-
-        return item
-
     def to_dict(self):
 
         item = {
@@ -25,15 +19,6 @@ class Item:
         }
 
         return item
-
-    def __repr__(self):
-        return(
-            f"""City(
-                name={self.name}
-                quantity={self.quantity}
-                date_created={self.date_created}
-            )"""
-        )
 
 
 def show_list(user_email):
