@@ -14,13 +14,13 @@ oauth = OAuth(app)
 GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
 GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
 
-CONF_URL = 'https://accounts.google.com/.well-known/openid-configuration'
+GOOGLE_DISCOVERY_URL = 'https://accounts.google.com/.well-known/openid-configuration'
 
 oauth.register(
     name='google',
     client_id=GOOGLE_CLIENT_ID,
     client_secret=GOOGLE_CLIENT_SECRET,
-    server_metadata_url=CONF_URL,
+    server_metadata_url=GOOGLE_DISCOVERY_URL,
     client_kwargs={
         'scope': 'openid email profile'
     }
