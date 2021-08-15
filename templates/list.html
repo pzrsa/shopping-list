@@ -4,18 +4,21 @@
 
 
 
-<button><a href="{{ url_for('delete_all') }}">Delete All Items</a></button>
+<a href="{{ url_for('login') }}">Sign in with a different account</a>
+
+
+<div><img src="{{ image }}" alt="Google Account Picture"></div>
 <p>Welcome back, {{ given_name }}</p>
-<img src="{{ image }}" alt="User Google Account Image">
+<button><a href="{{ url_for('delete_all') }}">Delete All Items</a></button>
 
 <form method="POST" enctype="multipart/form-data">
 
-    <div class="form-group">
+    <div>
         <label for="name">Name</label>
         <input type="text" name="name" id="name" value="{{ item.name }}" />
     </div>
 
-    <div class="form-group">
+    <div>
         <label for="quantity">Quantity</label>
         <input type="text" name="quantity" id="quantity" value="{{ item.quantity }}" />
     </div>
