@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect, request, session, abort
+from flask import Flask, render_template, url_for, redirect, request, session
 import firestore
 from authlib.integrations.flask_client import OAuth
 from config import Config
@@ -44,8 +44,9 @@ def login():
 @app.route('/auth')
 def auth():
     token = oauth.google.authorize_access_token()
-    user = oauth.google.parse_id_token(token)
-    session['user'] = user
+    user_info = oauth.google.parse_id_token(token)
+    session['user'] = user_info
+    session.permanent = True
     return redirect('/')
 
 
