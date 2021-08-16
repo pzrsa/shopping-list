@@ -1,25 +1,18 @@
-import os
 from flask import Flask, render_template, url_for, redirect, request, session
 import firestore
 from authlib.integrations.flask_client import OAuth
-from dotenv import load_dotenv
+from config import Config
 
-load_dotenv()
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.urandom(16).hex()
+app.config.from_object(Config)
 
 oauth = OAuth(app)
-
-GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
-GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
-GOOGLE_DISCOVERY_URL = 'https://accounts.google.com/.well-known/openid-configuration'
-
 oauth.register(
     name='google',
-    client_id=GOOGLE_CLIENT_ID,
-    client_secret=GOOGLE_CLIENT_SECRET,
-    server_metadata_url=GOOGLE_DISCOVERY_URL,
+    client_id=Config.GOOGLE_CLIENT_ID,
+    client_secret=Config.GOOGLE_CLIENT_SECRET,
+    server_metadata_url=Config.GOOGLE_DISCOVERY_URL,
     client_kwargs={
         'scope': 'openid email profile'
     }
