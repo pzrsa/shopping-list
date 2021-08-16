@@ -19,7 +19,7 @@ def add_item(user_email, name, quantity):
 
     query = db.collection(user_email)
 
-    if name == '' and quantity == '':
+    if name == '' or quantity == '' or isinstance(quantity, str):
         return
 
     new_item = Item(name, int(quantity)).to_dict()
