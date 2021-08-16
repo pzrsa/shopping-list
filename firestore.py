@@ -1,6 +1,5 @@
-from datetime import datetime
 from google.cloud import firestore
-from item import Item
+from models import Item
 
 
 def show_list(user_email):
@@ -19,7 +18,7 @@ def add_item(user_email, name, quantity):
 
     query = db.collection(user_email)
 
-    if name == '' or quantity == '' or isinstance(quantity, str):
+    if name == '' or quantity == '':
         return
 
     new_item = Item(name, int(quantity)).to_dict()
