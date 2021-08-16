@@ -9,7 +9,7 @@
 
 <div><img src="{{ image }}" alt="Google Account Picture"></div>
 <p>Welcome back, {{ given_name }}</p>
-<button><a href="{{ url_for('delete_all') }}">Delete All Items</a></button>
+<button><a href="{{ url_for('delete_all') }}" class="material-icons">delete_sweep</a></button>
 
 <form method="POST" enctype="multipart/form-data">
 
@@ -23,7 +23,7 @@
         <input type="text" name="quantity" id="quantity" value="{{ item.quantity }}" />
     </div>
 
-    <button type="submit">Add</button>
+    <button type="submit" class="material-icons">post_add</button>
 </form>
 
 
@@ -36,7 +36,7 @@
         <td style="text-align: center;">
             {{ item.to_dict()['quantity'] }}
         </td>
-        <td><button><a href="{{ item.id }}/delete">Delete Item</a></button></td>
+        <td><button><a href="{{ item.id }}/delete" class="material-icons">delete</a></button></td>
     </tr>
     {% endfor %}
 </table>
