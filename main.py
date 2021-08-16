@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect, request, session
+from flask import Flask, render_template, url_for, redirect, request, session, abort
 import firestore
 from authlib.integrations.flask_client import OAuth
 from config import Config
@@ -66,5 +66,4 @@ def delete_all():
 
 
 if __name__ == '__main__':
-
     app.run()
