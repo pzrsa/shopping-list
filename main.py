@@ -23,10 +23,9 @@ oauth.register(
 def list():
     if request.method == 'POST':
         new_name = request.form.to_dict()['name']
-        new_quantity = request.form.to_dict()['quantity']
 
         firestore.add_item(session['user'].get(
-            'email'), new_name, new_quantity)
+            'email'), new_name)
 
     if session:
         items = firestore.show_list(session['user'].get('email'))

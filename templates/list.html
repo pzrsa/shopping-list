@@ -18,11 +18,6 @@
         <input type="text" name="name" id="name" value="{{ item.name }}" />
     </div>
 
-    <div>
-        <label for="quantity">Quantity</label>
-        <input type="text" name="quantity" id="quantity" value="{{ item.quantity }}" />
-    </div>
-
     <button type="submit" class="material-icons">post_add</button>
 </form>
 
@@ -33,10 +28,9 @@
         <td style="text-align: center;">
             {{ item.to_dict()['name'] }}
         </td>
-        <td style="text-align: center;">
-            {{ item.to_dict()['quantity'] }}
+        <td>
+            <button><a href="{{ item.id }}/delete" class="material-icons">delete</a></button>
         </td>
-        <td><button><a href="{{ item.id }}/delete" class="material-icons">delete</a></button></td>
     </tr>
     {% endfor %}
 </table>
