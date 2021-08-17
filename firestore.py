@@ -13,17 +13,17 @@ def show_list(user_email):
     return docs
 
 
-def add_item(user_email, name):
+def add_item(user_email, item_name):
     db = firestore.Client()
 
     query = db.collection(user_email)
 
-    name = str(name).strip()
+    item_name = str(item_name).strip()
 
-    if name == '':
+    if item_name == '':
         return
 
-    new_item = Item(name).to_dict()
+    new_item = Item(item_name).to_dict()
 
     return query.add(new_item)
 
