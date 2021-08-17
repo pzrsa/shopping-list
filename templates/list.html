@@ -7,6 +7,7 @@
 <div class="d-flex justify-content-end">
     <a class="btn btn-danger material-icons" data-bs-toggle="modal" data-bs-target="#deleteAllModal">delete_sweep</a>
 </div>
+
 <div class="modal fade" id="deleteAllModal" tabindex="-1" aria-labelledby="deleteAllModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -26,11 +27,11 @@
 </div>
 
 <!-- Form for adding items to list -->
-<form class="row g-3" method="POST">
-    <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3 material-icons">add_shopping_cart</button>
+<form class="row" method="POST">
+    <div class="col-auto pe-1">
+        <button type="submit" class="btn btn-outline-primary mb-3 material-icons">add_shopping_cart</button>
     </div>
-    <div class="col-auto">
+    <div class="col-auto ps-1">
         <label for="itemName" class="visually-hidden">Add item</label>
         <input type="text" class="form-control" id="itemName" placeholder="Add item" name="name"
             value="{{ item.name }}">
