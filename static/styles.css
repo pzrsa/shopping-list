@@ -4,3 +4,17 @@ body {
   font-family: "Noto Sans", sans-serif !important;
   margin: 0 auto;
 }
+
+.container-md {
+  max-width: 600px;
+}
+
+.table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table tr {
+  text-align: center;
+  vertical-align: middle;
+}
