@@ -18,6 +18,8 @@ def add_item(user_email, name):
 
     query = db.collection(user_email)
 
+    name = str(name).strip()
+
     if name == '':
         return
 
