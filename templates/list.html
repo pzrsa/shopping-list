@@ -5,10 +5,11 @@
 
 <!-- Delete all items button -->
 <div class="d-flex justify-content-end">
-    <a class="btn btn-danger material-icons" data-bs-toggle="modal" data-bs-target="#deleteAllModal">delete_sweep</a>
+    <a type="button" class="btn btn-danger position-relative material-icons" data-bs-toggle="modal"
+        data-bs-target="#deleteAllModal">delete_sweep</a>
 </div>
 
-<div class="user-list mt-4">
+<div class="user-list mt-4 mb-5">
     <!-- Modal that pops up when user clicks delete all -->
     <div class="modal fade" id="deleteAllModal" tabindex="-1" aria-labelledby="deleteAllModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -18,7 +19,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Are you sure you want to delete your shopping list?
+                    {{ list_length }} items will be deleted from your shopping list.
                 </div>
                 <div class="modal-footer">
                     <a class="btn btn-secondary" data-bs-dismiss="modal">Cancel</a>
@@ -40,13 +41,14 @@
         </div>
         <div class="col-2 ps-0">
             <label for="itemQuantity" class="visually-hidden">Item quantity</label>
-            <input type="number" class="form-control" id="itemQuantity" name="quantity" step="1" placeholder="1"
+            <input type="number" class="form-control" id="itemQuantity" name="quantity" step="1" placeholder="1" min="1"
                 value="{{ item.quantity }}">
         </div>
     </form>
 
     <!-- Table with shopping list information and delete button for each item -->
-    <table class="table table-borderless">
+    <table class="table table-borderless caption-top">
+        <caption class="visually-hidden">List of items</caption>
         <thead>
             <tr>
                 <th scope="col">Item</th>
@@ -54,7 +56,6 @@
                 <th scope="col"></th>
             </tr>
         </thead>
-        <caption class="visually-hidden">List of items</caption>
         <tbody>
             {% for item in items %}
             <tr>
@@ -66,5 +67,4 @@
         </tbody>
     </table>
 </div>
-
 {% endblock %}
