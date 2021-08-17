@@ -45,3 +45,11 @@ def delete_all_items(email):
 
     for item in items:
         query.document(item.id).delete()
+
+
+def get_list_length(email):
+    db = firestore.Client()
+
+    query = db.collection(email).get()
+
+    return len(query)
