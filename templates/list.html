@@ -3,11 +3,10 @@
 {% block content %}
 
 
-
+<!-- Delete all items with modal for confirmation -->
 <div class="d-flex justify-content-end">
     <a class="btn btn-danger material-icons" data-bs-toggle="modal" data-bs-target="#deleteAllModal">delete_sweep</a>
 </div>
-
 <div class="modal fade" id="deleteAllModal" tabindex="-1" aria-labelledby="deleteAllModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -26,9 +25,10 @@
     </div>
 </div>
 
+<!-- Form for adding items to list -->
 <form class="row g-3" method="POST">
     <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3 material-icons">add</button>
+        <button type="submit" class="btn btn-primary mb-3 material-icons">add_shopping_cart</button>
     </div>
     <div class="col-auto">
         <label for="itemName" class="visually-hidden">Add item</label>
@@ -37,6 +37,7 @@
     </div>
 </form>
 
+<!-- Table with shopping list information and delete button for each item -->
 <table class="table">
     <thead>
         <tr>
