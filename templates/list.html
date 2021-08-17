@@ -12,14 +12,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete Entire List?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Delete all items?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 Are you sure you want to delete your shopping list?
             </div>
             <div class="modal-footer">
-                <a class="btn btn-secondary" data-bs-dismiss="modal">No</a>
+                <a class="btn btn-secondary" data-bs-dismiss="modal">Cancel</a>
                 <a class="btn btn-danger" href="{{ url_for('delete_all') }}">Delete</a>
             </div>
         </div>
@@ -39,8 +39,8 @@
 </form>
 
 <!-- Table with shopping list information and delete button for each item -->
-<table class="table">
-    <thead>
+<table class="table table-borderless">
+    <thead class="table-light">
         <tr>
             <th scope="col">Item</th>
             <th scope="col"></th>
