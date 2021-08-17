@@ -29,6 +29,7 @@ def list():
 
     if session:
         items = firestore.show_list(session['user'].get('email'))
+        # list_length = firestore.get_list_length(session['user'].get('email'))
         return render_template('list.html', item={}, items=items, given_name=session['user'].get('given_name'), image=session['user'].get('picture'))
     else:
         return redirect(url_for('login'))
@@ -63,6 +64,21 @@ def delete_all():
     firestore.delete_all_items(session['user'].get('email'))
 
     return redirect(url_for('list'))
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('errors/404.html'), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('errors/500.html'), 500
+
+
+@app.errorhandler(403)
+def page_forbidden(e):
+    return render_template('errors/403.html'), 403
 
 
 if __name__ == '__main__':
