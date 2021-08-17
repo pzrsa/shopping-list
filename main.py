@@ -28,10 +28,12 @@ def list():
         firestore.add_item(session['user'].get(
             'email'), new_item_name, new_item_quantity)
 
+    # If the user is logged in, then show the list. Otherwise take the user to the Google Sign In screen.
     if session:
         items = firestore.show_list(session['user'].get('email'))
-        # list_length = firestore.get_list_length(session['user'].get('email'))
-        return render_template('list.html', item={}, items=items, given_name=session['user'].get('given_name'), image=session['user'].get('picture'))
+        list_length = firestore.get_list_length(session['user'].get('email'))
+        # The Google user details are passed into the template. For example their profile picture.
+        return render_template('list.html', item={}, items=items, list_length=list_length, given_name=session['user'].get('given_name'), image=session['user'].get('picture'))
     else:
         return redirect(url_for('login'))
 
@@ -53,7 +55,6 @@ def auth():
 
 @app.route('/<item_id>/delete')
 def delete(item_id):
-
     firestore.delete_item(session['user'].get('email'), item_id)
 
     return redirect(url_for('list'))
@@ -61,15 +62,14 @@ def delete(item_id):
 
 @app.route('/delete_list')
 def delete_all():
-
     firestore.delete_all_items(session['user'].get('email'))
 
     return redirect(url_for('list'))
 
 
+# Useful for the user to change accounts or completely logout.
 @app.route('/logout')
 def logout():
-
     session.clear()
 
     return redirect('login')
