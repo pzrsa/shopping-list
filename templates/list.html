@@ -5,21 +5,49 @@
 
 
 <div class="d-flex justify-content-end">
-    <a href="{{ url_for('delete_all') }}" class="btn btn-danger material-icons">delete_sweep</a>
+    <a class="btn btn-danger material-icons" data-bs-toggle="modal" data-bs-target="#deleteAllModal">delete_sweep</a>
 </div>
+
+<div class="modal fade" id="deleteAllModal" tabindex="-1" aria-labelledby="deleteAllModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete Entire List?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete your shopping list?
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-secondary" data-bs-dismiss="modal">No</a>
+                <a class="btn btn-danger" href="{{ url_for('delete_all') }}">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form class="row g-3" method="POST">
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3 material-icons">add</button>
+    </div>
+    <div class="col-auto">
+        <label for="itemName" class="visually-hidden">Add item</label>
+        <input type="text" class="form-control" id="itemName" placeholder="Add item" name="name"
+            value="{{ item.name }}">
+    </div>
+</form>
 
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">#</th>
             <th scope="col">Item</th>
-            <th scope="col">Delete Item</th>
+            <th scope="col"></th>
         </tr>
     </thead>
+    <caption class="visually-hidden">List of items</caption>
     {% for item in items %}
     <tbody>
         <tr>
-            <th scope="row"></th>
             <td>{{ item.to_dict()['name'] }}</td>
             <td><a href="{{ item.id }}/delete" class="btn btn-outline-danger material-icons">delete</a></td>
         </tr>
@@ -27,15 +55,5 @@
 
     {% endfor %}
 </table>
-
-<form method="POST" enctype="multipart/form-data">
-
-    <div>
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" value="{{ item.name }}" />
-    </div>
-
-    <button type="submit" class="material-icons">post_add</button>
-</form>
 
 {% endblock %}
