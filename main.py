@@ -22,10 +22,11 @@ oauth.register(
 @app.route('/', methods=['GET', 'POST'])
 def list():
     if request.method == 'POST':
-        new_name = request.form.to_dict()['name']
+        new_item_name = request.form.to_dict()['name']
+        new_item_quantity = request.form.to_dict()['quantity']
 
         firestore.add_item(session['user'].get(
-            'email'), new_name)
+            'email'), new_item_name, new_item_quantity)
 
     if session:
         items = firestore.show_list(session['user'].get('email'))
@@ -64,6 +65,14 @@ def delete_all():
     firestore.delete_all_items(session['user'].get('email'))
 
     return redirect(url_for('list'))
+
+
+@app.route('/logout')
+def logout():
+
+    session.clear()
+
+    return redirect('login')
 
 
 @app.errorhandler(404)

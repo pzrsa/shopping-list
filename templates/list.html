@@ -3,59 +3,68 @@
 {% block content %}
 
 
-<!-- Delete all items with modal for confirmation -->
+<!-- Delete all items button -->
 <div class="d-flex justify-content-end">
     <a class="btn btn-danger material-icons" data-bs-toggle="modal" data-bs-target="#deleteAllModal">delete_sweep</a>
 </div>
 
-<div class="modal fade" id="deleteAllModal" tabindex="-1" aria-labelledby="deleteAllModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete all items?</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete your shopping list?
-            </div>
-            <div class="modal-footer">
-                <a class="btn btn-secondary" data-bs-dismiss="modal">Cancel</a>
-                <a class="btn btn-danger" href="{{ url_for('delete_all') }}">Delete</a>
+<div class="user-list mt-4">
+    <!-- Modal that pops up when user clicks delete all -->
+    <div class="modal fade" id="deleteAllModal" tabindex="-1" aria-labelledby="deleteAllModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete all items?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete your shopping list?
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-secondary" data-bs-dismiss="modal">Cancel</a>
+                    <a class="btn btn-danger" href="{{ url_for('delete_all') }}">Delete</a>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Form for adding items to list -->
+    <form class="row" method="POST">
+        <div class="col-auto">
+            <button type="submit" class="btn btn-outline-primary mb-3 material-icons">add_shopping_cart</button>
+        </div>
+        <div class="col-auto ps-0">
+            <label for="itemName" class="visually-hidden">Item name</label>
+            <input type="text" class="form-control" id="itemName" placeholder="Add item" name="name"
+                value="{{ item.name }}">
+        </div>
+        <div class="col-2 ps-0">
+            <label for="itemQuantity" class="visually-hidden">Item quantity</label>
+            <input type="number" class="form-control" id="itemQuantity" name="quantity" step="1" placeholder="1"
+                value="{{ item.quantity }}">
+        </div>
+    </form>
+
+    <!-- Table with shopping list information and delete button for each item -->
+    <table class="table table-borderless">
+        <thead>
+            <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Quantity</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <caption class="visually-hidden">List of items</caption>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.to_dict()['name'] }}</td>
+                <td>{{ item.to_dict()['quantity'] }}</td>
+                <td><a href="{{ item.id }}/delete" class="btn btn-outline-danger material-icons">delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
-
-<!-- Form for adding items to list -->
-<form class="row" method="POST">
-    <div class="col-auto pe-1">
-        <button type="submit" class="btn btn-outline-primary mb-3 material-icons">add_shopping_cart</button>
-    </div>
-    <div class="col-auto ps-1">
-        <label for="itemName" class="visually-hidden">Add item</label>
-        <input type="text" class="form-control" id="itemName" placeholder="Add item" name="name"
-            value="{{ item.name }}">
-    </div>
-</form>
-
-<!-- Table with shopping list information and delete button for each item -->
-<table class="table table-borderless">
-    <thead class="table-light">
-        <tr>
-            <th scope="col">Item</th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <caption class="visually-hidden">List of items</caption>
-    {% for item in items %}
-    <tbody>
-        <tr>
-            <td>{{ item.to_dict()['name'] }}</td>
-            <td><a href="{{ item.id }}/delete" class="btn btn-outline-danger material-icons">delete</a></td>
-        </tr>
-    </tbody>
-
-    {% endfor %}
-</table>
 
 {% endblock %}
