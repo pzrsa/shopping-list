@@ -1,3 +1,4 @@
+from os import SEEK_CUR
 from flask import Flask, render_template, url_for, redirect, request, session
 import firestore
 from authlib.integrations.flask_client import OAuth
@@ -50,7 +51,7 @@ def auth():
     user_info = oauth.google.parse_id_token(token)
     session['user'] = user_info
     session.permanent = True
-    return redirect('/')
+    return redirect(url_for('list'))
 
 
 @app.route('/<item_id>/delete')
@@ -65,14 +66,6 @@ def delete_all():
     firestore.delete_all_items(session['user'].get('email'))
 
     return redirect(url_for('list'))
-
-
-# Useful for the user to change accounts or completely logout.
-@app.route('/logout')
-def logout():
-    session.clear()
-
-    return redirect('login')
 
 
 @app.errorhandler(404)
