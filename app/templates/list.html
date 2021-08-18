@@ -5,8 +5,12 @@
 
 <!-- Delete all items button -->
 <div class="d-flex justify-content-end">
-    <a class="btn btn-danger position-relative material-icons" data-bs-toggle="modal"
-        data-bs-target="#deleteAllModal">delete_sweep</a>
+    <label class="visually-hidden">Delete All</label>
+    <a class="btn btn-danger position-relative" data-bs-toggle="modal" data-bs-target="#deleteAllModal">
+        <img src="{{ url_for('static', filename='delete_sweep.svg') }}" alt="Delete All Icon">
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">
+            {{ list_length }}
+            <span class="visually-hidden">items</span></a>
 </div>
 
 <div class="user-list mt-4 mb-5">
@@ -30,7 +34,7 @@
     </div>
 
     <!-- Form for adding items to list -->
-    <form class="row" method="POST">
+    <form class="row justify-content-center" method="POST">
         <div class="col-auto">
             <button type="submit" class="btn btn-outline-primary mb-3 material-icons">add_shopping_cart</button>
         </div>
