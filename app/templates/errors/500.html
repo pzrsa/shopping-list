@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div style="text-align: center;">
+
+    <h1>500</h1>
+    <h4>Uh oh. There was a server error. Feel free to email <a href="mailto:parsamesg@gmail.com">parsamesg@gmail.com</a>
+        what you attempted to do.
+    </h4>
+
+    <img src="https://placekitten.com/g/200/250" alt="Kitten">
+
+    <br>
+    <br>
+
+    <h5><a class="link-info" href="{{ url_for('list') }}">Go back to your shopping list.</a></h5>
+</div>
+
+{% endblock %}
