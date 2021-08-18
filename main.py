@@ -59,7 +59,7 @@ def delete(item_id):
     return redirect(url_for('list'))
 
 
-@app.route('/delete_list')
+@app.route('/delete-all')
 def delete_all():
     firestore.delete_all_items(session['user'].get('email'))
 
