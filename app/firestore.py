@@ -1,5 +1,5 @@
 from google.cloud import firestore
-from models import Item
+from app.models import Item
 
 
 def show_list(user_email):

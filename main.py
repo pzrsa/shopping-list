@@ -1,14 +1,10 @@
-from os import SEEK_CUR
-from flask import Flask, render_template, url_for, redirect, request, session
-import firestore
-from authlib.integrations.flask_client import OAuth
-from config import Config
+from flask import render_template, url_for, redirect, request, session
+import app.firestore as firestore
+from app.config import Config
+from app import create_app, oauth
 
+app = create_app()
 
-app = Flask(__name__)
-app.config.from_object(Config)
-
-oauth = OAuth(app)
 oauth.register(
     name='google',
     client_id=Config.GOOGLE_CLIENT_ID,
@@ -76,11 +72,6 @@ def page_not_found(e):
 @app.errorhandler(500)
 def internal_server_error(e):
     return render_template('errors/500.html'), 500
-
-
-@app.errorhandler(403)
-def page_forbidden(e):
-    return render_template('errors/403.html'), 403
 
 
 if __name__ == '__main__':
