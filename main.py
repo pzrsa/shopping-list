@@ -1,7 +1,8 @@
-from flask import render_template, url_for, redirect, request, session
+from flask import redirect, render_template, request, session, url_for
+
 import app.firestore as firestore
-from app.config import Config
 from app import create_app, oauth
+from app.config import Config
 
 app = create_app()
 
@@ -30,7 +31,8 @@ def list():
         items = firestore.show_list(session['user'].get('email'))
         list_length = firestore.get_list_length(session['user'].get('email'))
         # The Google user details are passed into the template. For example their profile picture.
-        return render_template('list.html', item={}, items=items, list_length=list_length, given_name=session['user'].get('given_name'), image=session['user'].get('picture'))
+        return render_template('list.html', item={}, items=items, list_length=list_length,
+                               given_name=session['user'].get('given_name'), image=session['user'].get('picture'))
     else:
         return redirect(url_for('login'))
 
